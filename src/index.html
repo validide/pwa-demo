@@ -1,0 +1,45 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>PWA Demo</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/styles/shell.css">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Weather PWA">
+  <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png">
+  <meta name="description" content="Progressive Web App for demoing different options and features">
+  <meta name="theme-color" content="#97d700">
+</head>
+
+<body>
+  <noscript>
+    <h1>Please enable JavaScript!</h1>
+  </noscript>
+</body>
+
+<script src="/scripts/install.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/shell-service-worker.js')
+          .then((reg) => {
+            console.log('Service worker registered.', reg);
+          })
+          .catch((error) => {
+            console.log('Service worker failed to register.', error);
+          })
+          .finally(() => {
+            // window.document.body.classList.add('shell-loaded');
+          });
+    });
+  }
+</script>
+
+</html>
