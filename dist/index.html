@@ -18,7 +18,6 @@
   <link rel="icon" type="image/png" sizes="96x96" href="images/icons/icon-96x96.png">
   <meta name="description" content="Progressive Web App for demoing different options and features">
   <meta name="theme-color" content="#97d700">
-
 </head>
 
 <body>
@@ -27,9 +26,12 @@
   </noscript>
 </body>
 
-<script src="/scripts/install.js"></script>
+<script src="scripts/shell.js"></script>
 
 <script>
+  function onReady(fn) { document.readyState != 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
+  window.shell.initialize();
+
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/shell-service-worker.js')
@@ -38,12 +40,11 @@
           })
           .catch((error) => {
             console.log('Service worker failed to register.', error);
-          })
-          .finally(() => {
-            // window.document.body.classList.add('shell-loaded');
           });
     });
   }
+
+  onReady(() => window.shell.initialized());
 </script>
 
 </html>

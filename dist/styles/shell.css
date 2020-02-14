@@ -1,5 +1,6 @@
 body {
   font-family: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
+  background-color: #f8f8f8;
 }
 
 body:not(.shell-loaded) {
@@ -19,11 +20,15 @@ body:not(.shell-loaded):before {
   border-radius: 50%;
   border: .25rem solid #ccc;
   border-top-color: #97d700;
-  animation: spinner .6s linear infinite;
+  animation: spinner .6s linear infinite, fade-in .3s linear 1 normal forwards;
 }
 
 @keyframes spinner {
   to {transform: rotate(360deg);}
+}
+@keyframes fade-in {
+  0%{opacity:0}
+  100%{opacity:1}
 }
 
 noscript h1 {
