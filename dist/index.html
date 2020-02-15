@@ -18,33 +18,48 @@
   <link rel="icon" type="image/png" sizes="96x96" href="images/icons/icon-96x96.png">
   <meta name="description" content="Progressive Web App for demoing different options and features">
   <meta name="theme-color" content="#97d700">
+
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="./">Home</a>
+    <div class="navbar-collapse collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Page 1</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Page 2</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Page 3</a>
+        </li>
+      </ul>
+    </div>
+    <span class="navbar-text text-danger d-none float-right" id="offline-warning">
+      You seem to be offline.
+    </span>
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
   <noscript>
     <h1>Please enable JavaScript!</h1>
   </noscript>
+  <div class="app"></div>
 </body>
 
 <script src="scripts/shell.js"></script>
-
 <script>
-  function onReady(fn) { document.readyState != 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
   window.shell.initialize();
-
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/shell-service-worker.js')
-          .then((reg) => {
-            console.log('Service worker registered.', reg);
-          })
-          .catch((error) => {
-            console.log('Service worker failed to register.', error);
-          });
-    });
-  }
-
-  onReady(() => window.shell.initialized());
+  window.shell.onReady(() => window.shell.initialized());
 </script>
-
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </html>
