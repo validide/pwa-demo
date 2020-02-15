@@ -19,13 +19,19 @@ const URLS_TO_CACHE = [
   './images/icons/icon-152x152.png',
   './images/icons/icon-192x192.png',
   './images/icons/icon-384x384.png',
-  './images/icons/icon-512x512.png'
+  './images/icons/icon-512x512.png',
+  './pages/vuejs/index.html',
+  './pages/reactjs/index.html',
+  './pages/about/index.html'
 ];
 const CDN_URLS_TO_CACHE = [
   'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css',
   'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js',
   'https://code.jquery.com/jquery-3.4.1.slim.min.js',
-  'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'
+  'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js',
+  'https://cdn.jsdelivr.net/npm/react@16.12.0/umd/react.production.min.js',
+  'https://cdn.jsdelivr.net/npm/react-dom@16.12.0/umd/react-dom.production.min.js',
+  'https://cdn.jsdelivr.net/npm/babel-standalone@6.26.0/babel.min.js'
 ];
 
 const cacheItems = function (cacheName, urls) {

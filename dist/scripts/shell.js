@@ -11,13 +11,13 @@
   }
 
   function initialize() {
+    const swPath = window.document.querySelector('[data-sw-path]').getAttribute('data-sw-path');
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('shell-service-worker.js')
+        navigator.serviceWorker.register(swPath)
           .then((reg) => {
             console.log('Service worker registered.', reg);
-          })
-          .catch((error) => {
+          }, (error) => {
             console.log('Service worker failed to register.', error);
           });
       });
@@ -25,7 +25,8 @@
 
     window.addEventListener('offline', handleNavigatorOnlineStatus);
     window.addEventListener('online', handleNavigatorOnlineStatus);
-    handleNavigatorOnlineStatus();
+
+    onReady(initialized);
   }
 
   function initialized() {
@@ -35,6 +36,8 @@
     } else {
       window.document.title += ' Web Site'
     }
+
+    handleNavigatorOnlineStatus();
   }
 
   function onReady(callback) {

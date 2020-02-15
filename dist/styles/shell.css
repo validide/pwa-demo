@@ -1,9 +1,13 @@
 html body {
-  background-color: #699500;
+  /* background-color: #699500; */
 }
 
 html body:not(.shell-loaded) {
   background-color: #f8f8f8;
+}
+
+html body:not(.shell-loaded) #app {
+  display: none;
 }
 
 html body:not(.shell-loaded):before {
@@ -37,7 +41,7 @@ noscript h1 {
 
 @media all and (display-mode: standalone) {
   body {
-    background-color: #86bf00;
+    /* background-color: #86bf00; */
   }
 }
 

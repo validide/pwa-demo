@@ -7,15 +7,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" type="text/css" href="./styles/shell.css">
-  <link rel="icon" href="./favicon.ico" type="image/x-icon" />
-  <link rel="manifest" href="./site.webmanifest">
+  <link rel="stylesheet" type="text/css" href="../../styles/shell.css">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon" />
+  <link rel="manifest" href="../../site.webmanifest">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Weather PWA">
-  <link rel="apple-touch-icon" href="./images/icons/icon-152x152.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="./images/icons/icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="./images/icons/icon-96x96.png">
+  <link rel="apple-touch-icon" href="../../images/icons/icon-152x152.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="../../images/icons/icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="../../images/icons/icon-96x96.png">
   <meta name="description" content="Progressive Web App for demoing different options and features">
   <meta name="theme-color" content="#97d700">
 
@@ -24,20 +24,20 @@
 
 <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-    <a class="navbar-brand" href="./index.html">PWA Demo</a>
+    <a class="navbar-brand" href="../../index.html">PWA Demo</a>
     <div class="navbar-collapse collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="../../index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../vuejs/index.html">Vue</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../reactjs/index.html">React</a>
+        </li>
         <li class="nav-item active">
-          <a class="nav-link" href="./index.html">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./pages/vuejs/index.html">Vue</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./pages/reactjs/index.html">React</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./pages/about/index.html">About</a>
+          <a class="nav-link" href="./index.html">About</a>
         </li>
       </ul>
     </div>
@@ -54,13 +54,15 @@
   <div id="app">
     <main class="container" role="main">
       <h1>Progresive Web App Demo</h1>
+      <p>Demo application to test different web technologies features.</p>
     </main>
   </div>
 </body>
 
-<script src="./scripts/shell.js" data-sw-path="./shell-service-worker.js"></script>
+<script src="../../scripts/shell.js" data-sw-path="../../shell-service-worker.js"></script>
 <script>window.shell.initialize();</script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 </html>
