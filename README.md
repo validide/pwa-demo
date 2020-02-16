@@ -1,8 +1,10 @@
 # pwa-demo
 Progressive Web App for demoing different options and features
 
+## Demo app: https://validide.github.io/pwa-demo/index.html
+
 ## References
-A collection of all the articles and code I have read during developing this
+A collection articles and code I have read during developing this
 - https://github.com/googlecodelabs/your-first-pwapp
 - https://codelabs.developers.google.com/codelabs/your-first-pwapp/index.html
 - https://developers.google.com/web/fundamentals/primers/service-workers
