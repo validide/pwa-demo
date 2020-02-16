@@ -35,12 +35,12 @@ const CDN_URLS_TO_CACHE = [
 ];
 
 const cacheItems = function (cacheName, urls) {
-  console.log(`[ServiceWorker] Pre-caching "${cacheName}" items`);
+  //console.log(`[ServiceWorker] Pre-caching "${cacheName}" items`);
   return caches
     .open(cacheName)
     .then(cache => cache.addAll(urls));
 }
-const fetchFromCache = function(evt, cacheName) {
+const fetchFromCache = function (evt, cacheName) {
   evt.respondWith(caches.open(cacheName).then((cache) => {
     return cache.match(evt.request)
       .then((response) => {
@@ -53,47 +53,47 @@ const isStaticResourceCall = (request) => URLS_TO_CACHE.indexOf(request.url) !==
 const isCdnResourceCall = (request) => CDN_URLS_TO_CACHE.indexOf(request.url) !== -1;
 
 self.addEventListener('install', (evt) => {
-  // The promise that skipWaiting() returns can be safely ignored
-  self.skipWaiting();
-
-  console.log('[ServiceWorker] Install');
+  //console.log('[ServiceWorker] Install');
 
   evt.waitUntil(Promise.all(
     [
       cacheItems(STATIC_CACHE_NAME, URLS_TO_CACHE),
-      cacheItems(CDN_CACHE_NAME, CDN_URLS_TO_CACHE)
+      cacheItems(CDN_CACHE_NAME, CDN_URLS_TO_CACHE),
+      self.skipWaiting()
     ]
   ));
 
 });
 
 self.addEventListener('activate', (evt) => {
-  console.log('[ServiceWorker] Activate');
+  //console.log('[ServiceWorker] Activate');
 
-  // Remove previous cached data from disk
-  evt.waitUntil(
-    caches.keys().then((keyList) => {
-      // `keyList` contains all cache names under your site `xxx.contoso.com`
-      // filter out ones that have this app prefix to create white list
-      const cacheWhitelist = [
-        CDN_CACHE_NAME,
-        STATIC_CACHE_NAME,
-        API_CACHE_NAME
-      ];
+  evt.waitUntil(Promise.all(
+    [
+      // Remove previous cached data from disk
+      caches.keys().then((keyList) => {
+        // `keyList` contains all cache names under your site `xxx.contoso.com`
+        // filter out ones that have this app prefix to create white list
+        const cacheWhitelist = [
+          CDN_CACHE_NAME,
+          STATIC_CACHE_NAME,
+          API_CACHE_NAME
+        ];
 
-      return Promise.all(keyList.map((key) => {
-        if (cacheWhitelist.indexOf(key) === -1) {
-          console.log('[ServiceWorker] Removing old cache', key);
-          return caches.delete(key);
-        }
-      }));
-    })
-  );
-
+        return Promise.all(keyList.map((key) => {
+          if (cacheWhitelist.indexOf(key) === -1) {
+            //console.log('[ServiceWorker] Removing old cache', key);
+            return caches.delete(key);
+          }
+        }));
+      }),
+      clients.claim()
+    ]
+  ));
 });
 
 self.addEventListener('fetch', (evt) => {
-  console.log('[Service Worker] Fetch', evt.request.url);
+  //console.log('[Service Worker] Fetch', evt.request.url);
 
   if (isApiCall(evt.request)) {
     evt.respondWith(
@@ -110,7 +110,7 @@ self.addEventListener('fetch', (evt) => {
             return cache.match(evt.request);
           });
       }));
-      return;
+    return;
   }
 
   if (isCdnResourceCall(evt.request)) {
