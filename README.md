@@ -14,3 +14,5 @@ A collection articles and code I have read during developing this
 - https://codelabs.developers.google.com/codelabs/push-notifications/#0
 - https://web.dev/google-search-sw/
 - https://stackoverflow.com/questions/33986976/how-can-i-remove-a-buggy-service-worker-or-implement-a-kill-switch/38980776#38980776
+- https://web.dev/customize-install/
+
