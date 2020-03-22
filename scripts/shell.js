@@ -1,23 +1,66 @@
-'use strict';
 (function (window, undefined) {
+  'use strict';
+  var beforeInstallPromptDeferred;
+
 
   function isStandalone() { return window.matchMedia('(display-mode: standalone)').matches; }
+
   function handleNavigatorOnlineStatus() {
-    if (navigator.onLine) {
-      document.getElementById('offline-warning').classList.add('d-none');
-    } else {
-      document.getElementById('offline-warning').classList.remove('d-none');
+    var installButton = window.document.getElementById('install-web-app');
+    if (installButton) {
+      if (navigator.onLine) {
+        installButton.removeAttribute('disabled');
+        installButton.classList.remove('disabled');
+      } else {
+        installButton.classList.add('disabled');
+        installButton.setAttribute('disabled', 'disabled');
+      }
     }
+  }
+
+  function promptInstall(e) {
+    if (!beforeInstallPromptDeferred || e.target.getAttribute('disabled') !== null)
+      return;
+
+    beforeInstallPromptDeferred.prompt();
+  }
+  function refrehsInstallUi() {
+    var button = window.document.getElementById('install-web-app');
+    if (!button)
+      return;
+
+    var show = !isStandalone() && beforeInstallPromptDeferred !== null;
+    if (show) {
+      button.addEventListener('click', promptInstall);
+      button.classList.remove('d-none');
+    } else {
+      button.classList.add('d-none');
+      button.removeEventListener('click', promptInstall);
+    }
+  }
+
+  function handleBeforeInstallPrompt(e) {
+    // Prevent the mini-infobar from appearing on mobile
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    beforeInstallPromptDeferred = e;
+    // Update UI so the user they can install the PWA
+    refrehsInstallUi();
+  };
+
+  function appInstalledPrompt(e) {
+    beforeInstallPromptDeferred = null;
+    refrehsInstallUi();
   }
 
   function initialize() {
     const swPath = window.document.querySelector('[data-sw-path]').getAttribute('data-sw-path');
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
+      window.addEventListener('load', function () {
         navigator.serviceWorker.register(swPath)
-          .then((reg) => {
+          .then(function (reg) {
             console.log('Service worker registered.', reg);
-          }, (error) => {
+          }, function (error) {
             console.log('Service worker failed to register.', error);
           });
       });
@@ -25,7 +68,8 @@
 
     window.addEventListener('offline', handleNavigatorOnlineStatus);
     window.addEventListener('online', handleNavigatorOnlineStatus);
-
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('appinstalled', appInstalledPrompt);
     onReady(initialized);
   }
 
@@ -48,7 +92,7 @@
 
   window.shell = {
     initialize: initialize,
-    initialized: initialized,
+    isStandalone: isStandalone,
     onReady: onReady
   };
 
