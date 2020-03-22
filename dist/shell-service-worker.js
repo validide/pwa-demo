@@ -2,7 +2,7 @@
 
 const APP_PREFIX = 'pwa-demo';
 const APP_VERSION = 'v1.1';
-const CACHE_PREFIX = `${APP_PREFIX}/${APP_PREFIX}`;
+const CACHE_PREFIX = `${APP_PREFIX}/${APP_VERSION}`;
 const STATIC_CACHE_NAME = `${CACHE_PREFIX}/static-cache/`;
 const API_CACHE_NAME = `${CACHE_PREFIX}/api-cache/`;
 const CDN_CACHE_NAME = `${APP_PREFIX}/v1/cdn-cache/`;
